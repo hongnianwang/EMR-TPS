@@ -64,6 +64,29 @@ See data notes:
 6. Performance tables
    - `src/generate_table2_table3_performance.py`
 
+## SQL Cohort Extraction
+
+- SQL dialect: PostgreSQL
+- Key source schemas:
+  - `mimiciv_hosp`, `mimiciv_icu`, `mimiciv_derived`
+  - `eicu_crd`
+- Public SQL scripts:
+  - `sql/mimic/cohort.sql`
+  - `sql/mimic/mimic_flow_statistics.sql`
+  - `sql/eicu/eicu_build_cohort_index.sql`
+  - `sql/eicu/eicu_external_validation.sql`
+  - `sql/eicu/eicu_external_validation_batch.sql`
+  - `sql/eicu/eicu_flow_statistics.sql`
+- Main output tables for manuscript traceability:
+  - `public.mimic_flow_statistics`
+  - `public.eicu_flow_statistics`
+  - `public.eicu_cohort_index`
+  - `public.eicu_external_validation_tabular`
+  - `public.eicu_external_validation_ts_long`
+- Suggested run order: `flow statistics -> cohort index/cohort build -> external extraction`
+- `*_batch.sql` provides a lower-memory alternative for resource-constrained environments.
+- Note: these SQL files include statements such as `DROP TABLE IF EXISTS`; run in an isolated schema or test database.
+
 ## Example Commands
 
 ```bash
